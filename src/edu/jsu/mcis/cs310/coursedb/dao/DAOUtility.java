@@ -14,10 +14,23 @@ public class DAOUtility {
         
         try {
         
-            if (rs != null) {
+             if (rs != null) {
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int columnCount = rsmd.getColumnCount();
 
-                // INSERT YOUR CODE HERE
+                while(rs.next()) {
+                    JsonObject sectionData = new JsonObject();
 
+                    for(int i = 1; i <= columnCount; ++i) {
+                        String columnName = rsmd.getColumnName(i);
+                        Object columnValue = rs.getObject(i);
+                        sectionData.put(columnName, columnValue != null ? columnValue.toString() : null);
+                    }
+
+                    records.add(sectionData);
+                }
+
+                
             }
             
         }

@@ -27,7 +27,11 @@ public class RegistrationDAO {
             
             if (conn.isValid(0)) {
                 
-                // INSERT YOUR CODE HERE
+                ps = conn.prepareStatement("INSERT INTO registration (studentid, termid, crn) VALUES (?, ?, ?)");
+                ps.setInt(1, studentid);
+                ps.setInt(2, termid);
+                ps.setInt(3, crn);
+                result = ps.executeUpdate() > 0;
                 
             }
             
@@ -58,7 +62,11 @@ public class RegistrationDAO {
             
             if (conn.isValid(0)) {
                 
-                // INSERT YOUR CODE HERE
+                ps = conn.prepareStatement("DELETE FROM registration WHERE (studentid = ?) AND (termid) = ? AND (crn = ?)");
+                ps.setInt(1, studentid);
+                ps.setInt(2, termid);
+                ps.setInt(3, crn);
+                result = ps.executeUpdate() > 0;
                 
             }
             
@@ -87,8 +95,11 @@ public class RegistrationDAO {
             Connection conn = daoFactory.getConnection();
             
             if (conn.isValid(0)) {
-                
-                // INSERT YOUR CODE HERE
+                  
+                ps = conn.prepareStatement("DELETE FROM registration WHERE (studentid = ?) AND (termid = ?)");
+                ps.setInt(1, studentid);
+                ps.setInt(2, termid);
+                result = ps.executeUpdate() > 0;
                 
             }
             
@@ -120,7 +131,11 @@ public class RegistrationDAO {
             
             if (conn.isValid(0)) {
                 
-                // INSERT YOUR CODE HERE
+                ps = conn.prepareStatement("SELECT * FROM registration WHERE (studentid = ?) AND (termid = ?)");
+                ps.setInt(1, studentid);
+                ps.setInt(2, termid);
+                rs = ps.executeQuery();
+                result = DAOUtility.getResultSetAsJson(rs);
                 
             }
             
